@@ -22,7 +22,8 @@ def main():
 
         elif choice == "2":
             id_to_delete = int(input("Please enter the teacher's id to delete: "))
-            teacher_service.delete_teacher(id_to_delete)
+            if teacher_service.get_teacher_by_id(id_to_delete):
+                teacher_service.delete_teacher(id_to_delete)
 
         elif choice == "3":
             teacher_to_update = td.TeacherDTO(0, "", "")

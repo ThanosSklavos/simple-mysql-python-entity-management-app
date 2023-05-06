@@ -37,14 +37,17 @@ class TeacherServiceImpl(ABCTeacherService):
         teacher = dto_to_entity(teacher_dto)
         try:
             self.teacher_DAO.insert(teacher)
+            print("Success in inserting teacher!")
         except Exception as e:
             print("Error in inserting teacher, try another ID")
 
     def update_teacher(self, teacher_dto:TeacherDTO):
         self.teacher_DAO.update(teacher_dto.id, teacher_dto.firstname, teacher_dto.lastname)
+        print("Teacher updated")
 
     def delete_teacher(self, id:int):
         self.teacher_DAO.delete(id)
+        print("Teacher deleted")
         
     def get_teacher_by_lastname(self, lastname:str):
         try:
@@ -55,7 +58,11 @@ class TeacherServiceImpl(ABCTeacherService):
         return teacherDTO 
     
     def get_teacher_by_id(self, id:int):
-        teacherDTO = self.teacher_DAO.get_teacher_by_id(id)
+        try:
+            teacherDTO = self.teacher_DAO.get_teacher_by_id(id)
+        except TeacherIDNotFoundError as e:
+            print(e)
+            return None
         return teacherDTO 
     
     def get_all_teachers(self):
