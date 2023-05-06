@@ -42,9 +42,12 @@ def main():
 
         elif choice == "5":
             teacher_list = teacher_service.get_all_teachers()
+            print("\n----------  Entries  -----------")
+            print("ID     Firstname    Lastname")
+            print("--------------------------------")
             for teacher in teacher_list:
-                print(f"{teacher.id}. {teacher.firstname} {teacher.lastname}")
-
+                print(f"{teacher.id:<6} {teacher.firstname:<12} {teacher.lastname}")
+            print("-------------------------------")
         elif choice.lower() in ["q", "quit"]:
             print("Goodbye!")
             break
